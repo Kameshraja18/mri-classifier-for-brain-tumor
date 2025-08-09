@@ -8,15 +8,17 @@ import os
 from util import set_background
 from model import unet_model, postprocess_mask
 
-
 set_background('./bg.jpeg')
 
 # Load model
 model = unet_model()
-weights_path = 'brain_tumor_segmentation.h5'
+weights_path = 'brain_tumor_classifier.h5'
 if os.path.exists(weights_path):
-    model.load_weights(weights_path)
-    st.success("Tumor detection model loaded successfully")
+    try:
+        model.load_weights(weights_path, by_name=True, skip_mismatch=True)
+        st.success("Tumor detection model loaded successfully (with skip_mismatch=True)")
+    except Exception as e:
+        st.error(f"Error loading weights: {e}")
 else:
     st.warning("Trained weights not found. Using untrained model. Please train the model first for accurate results.")
 

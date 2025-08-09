@@ -1,0 +1,7 @@
+"venv/" 
+"__pycache__/" 
+"*.pyc" 
+"BraTS2020_TrainingData/" 
+"*.h5" 
+"yolov8n.pt" 
+"train images/" 
